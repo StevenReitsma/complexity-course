@@ -1,6 +1,5 @@
 package petproblem;
 
-import java.util.AbstractMap.SimpleEntry;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
