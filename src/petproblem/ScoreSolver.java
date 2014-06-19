@@ -1,6 +1,10 @@
 package petproblem;
 
 
+/**
+ * @author Robbert v.d Gugten & Steven Reitsma
+ * Solves the pet problem by assigning scores to every combination. Picking the best scores top-down gives the solution. Complexity O(n*m)
+ */
 public class ScoreSolver implements IPetproblemSolver {
 
 	@Override
@@ -23,13 +27,13 @@ public class ScoreSolver implements IPetproblemSolver {
 			int index = -1;
 			int highestscore = 0;
 			for(int j = 0; j<m; j++){
-				if (todo[j])
+				if (todo[j])                                         //check if the pet hasn't been picked yet
 					if (scores[i][j] > highestscore){
 						highestscore = scores[i][j];
 						index = j;
 					}
-					else if (scores[i][j] == highestscore){
-						if (index != -1){
+					else if (scores[i][j] == highestscore){         //take the row where the least points will be lost
+						if (index != -1){                           
 							if (values[i][index] > values[i][j]){
 								index = j;
 							}
@@ -37,7 +41,7 @@ public class ScoreSolver implements IPetproblemSolver {
 					}
 					
 			}
-			if (index == -1){
+			if (index == -1){ //if the index has not been changed it means every pet has been chosen so maximum has been reached
 				result[i] = -1;
 			}
 			else if (compatibility[i][index] == 0){
@@ -58,6 +62,12 @@ public class ScoreSolver implements IPetproblemSolver {
 		return result;
 	}
 	
+	/**
+	 * @param scores: A matrix with a score for each coordinate, higher is better
+	 * @param n: The number of children
+	 * @param m: The number of pets
+	 * @return a valuematrix where every coordinate determines the score that will be lost when assigning the pet to the child.
+	 */
 	private int[][] valuematrix(int [][]scores, int n, int m){
 		int[][]values= new int [n][m];
 		for (int i = n-1; i >= 0; i--){
@@ -79,33 +89,15 @@ public class ScoreSolver implements IPetproblemSolver {
 		return values;
 	}
 	
-//	private int compareScore(int [][] scores, int i, int j,int n){
-//		int score = 0;
-//		if (i == n-1){
-//			return 0;
-//		}
-//		else{
-//			for (int z = i+1; i<n; i++ ){
-//				score += scores[z][j];
-//			}
-//			return score;
-//		}
-//
-//		
-//	}
 	
-//	private int highestIndex(int ex, int[] rowToCheck)
-//	{
-//		int highest = 0;
-//		for (int i = 0; i < rowToCheck.length; i++){
-//			if (i != ex)
-//				if (rowToCheck[i] > highest){
-//					highest = rowToCheck[i];
-//				}
-//		}
-//	return highest;
-//	}
-	
+	/**
+	 * @param n: The number of children
+	 * @param m: The number of pets
+	 * @param compatibility: The compatibility matrix 
+	 * @return a score matrix that determines the score for each coordinate if pet is assigned to the child. 
+	 * It checks the best score of the previous row (in this case the next row because we start at the bottom of the matrix) but with excluding the current pet index. 
+	 * The score in the compatibility matrix is then added.
+	 */
 	private int[][] createScores(int n, int m, int[][] compatibility){
 		int[][] scores = new int[n][m];
 		Tuple best = new Tuple(0,0);
@@ -114,7 +106,7 @@ public class ScoreSolver implements IPetproblemSolver {
 		Tuple secondnewbest = new Tuple(0,0);
 		for (int i = n-1; i >= 0; i--){
 			for (int j = m-1; j >= 0; j--){
-				if (i == n-1){
+				if (i == n-1){ //bottom row
 					scores[i][j] = compatibility[i][j];
 				}
 				else{
@@ -122,10 +114,11 @@ public class ScoreSolver implements IPetproblemSolver {
 						scores[i][j] = compatibility[i][j] + best.value;
 					else scores[i][j] = compatibility[i][j] + secondbest.value;
 				}
-				if (scores[i][j] > newbest.value)
+				if (scores[i][j] > newbest.value)                   //set the best value of the current row
 					newbest = new Tuple(j,scores[i][j]);
-				else if (scores[i][j] > secondnewbest.value)
-					secondnewbest = new Tuple(j,scores[i][j]);
+				else if (scores[i][j] > secondnewbest.value)        //set the second best value of the current row. 
+					secondnewbest = new Tuple(j,scores[i][j]);		//second best is needed if the pet index in current row is the same as the best score index in the previous row
+					
 				
 			}
 			best = newbest;
