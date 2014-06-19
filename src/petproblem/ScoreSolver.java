@@ -9,25 +9,16 @@ public class ScoreSolver implements IPetproblemSolver {
 
 	@Override
 	public int[] solve(int n, int m, int[][] compatibility) {
-		boolean[] todo = new boolean[m];
-		for (int i = 0; i < m; i++){
-			todo[i] = true;
-		}
-//		long time = System.currentTimeMillis();
+		boolean[] done = new boolean[m];
+
 		int [][]scores = createScores(n,m,compatibility);
-//		time = System.currentTimeMillis() - time;
-//		System.out.println("time for creating scores: " + time);
-//		time = System.currentTimeMillis();
 		int [][]values = valuematrix(scores,n,m);
-//		time = System.currentTimeMillis() - time;
-//		System.out.println("time for creating values: " + time);
 		int [] result = new int[n];
-//		time = System.currentTimeMillis();
 		for (int i = 0; i<n; i++){
 			int index = -1;
 			int highestscore = 0;
 			for(int j = 0; j<m; j++){
-				if (todo[j])                                         //check if the pet hasn't been picked yet
+				if (!done[j])                                         //check if the pet hasn't been picked yet
 					if (scores[i][j] > highestscore){
 						highestscore = scores[i][j];
 						index = j;
@@ -49,7 +40,7 @@ public class ScoreSolver implements IPetproblemSolver {
 			}
 			else{
 				result[i] = index;
-				todo[index] = false;
+				done[index] = true;
 			}
 		}
 		int score = 0;
