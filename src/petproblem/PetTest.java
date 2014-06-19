@@ -28,7 +28,7 @@ public class PetTest {
 	@Parameters
 	public static Collection<Object[]> data() {
 		Object[][] solvers = new Object[][] {
-				{ new SumSolver()
+				{ new ScoreSolver()
 				/* Add your own solution here! */
 				//, new LastnameSolver()
 				}
@@ -98,7 +98,7 @@ public class PetTest {
 		System.out.println("n = " + n + ", m = " + m + ", " + Arrays.toString(result));
 	}
 	
-	@Test()
+	@Test(timeout = 2000)
 	public void testExample() {
 		int n = 5, m = 4;
 		int[][] compatibility = {
@@ -115,19 +115,19 @@ public class PetTest {
 		Assert.assertEquals("Does not give a correct answer", 4, computeCompatibility(compatibility, result));
 	}
 	
-	@Test()
+	@Test(timeout = 2000)
 	public void testGeneratedSmall() {
 		performGeneratedTest(8, 10);
 		performGeneratedTest(10, 8);
 	}
 	
-	@Test()
+	@Test(timeout = 2000)
 	public void testGeneratedMedium() {
 		performGeneratedTest(23, 20);
 		performGeneratedTest(20, 23);
 	}
 	
-	@Test() //5000
+	@Test(timeout = 5000) //5000
 	public void testGeneratedLarge() {
 		performGeneratedTest(121, 130);
 		performGeneratedTest(130, 121);
@@ -138,7 +138,7 @@ public class PetTest {
 	 * your solution is not incorrect if it takes longer,
 	 * or if it is not capable to finish in a reasonable amount of time.
 	 */
-	@Test() // 5000 
+	@Test(timeout = 5000) // 5000 
 	public void testGeneratedTerrible() {
 		performGeneratedTest(2910, 3102);
 		performGeneratedTest(3102, 2910);
