@@ -48,8 +48,6 @@ public class ScoreSolver implements IPetproblemSolver {
 			score += result[i] == -1 ? 0 : 1;
 		
 		System.out.println("Score: " + score);
-//		time = System.currentTimeMillis() - time;
-//		System.out.println("time for creating values: " + time);
 		return result;
 	}
 	
@@ -71,12 +69,6 @@ public class ScoreSolver implements IPetproblemSolver {
 				}
 			}
 		}
-//		for (int i = 0; i < n; i++){
-//			for (int j = 0; j<m; j++){
-//				System.out.print(values[i][j] + " ");
-//			}
-//			System.out.println();
-//		}
 		return values;
 	}
 	
@@ -116,12 +108,6 @@ public class ScoreSolver implements IPetproblemSolver {
 			secondbest = secondnewbest;
 			
 		}
-//		for (int i = 0; i < n; i++){
-//			for (int j = 0; j<m; j++){
-//				System.out.print(scores[i][j] + " ");
-//			}
-//			System.out.println();
-//		}
 		return scores;
 		
 	}
