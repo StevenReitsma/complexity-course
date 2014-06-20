@@ -5,7 +5,7 @@ package petproblem;
  * @author Robbert v.d Gugten & Steven Reitsma
  * Solves the pet problem by assigning scores to every combination. Picking the best scores top-down gives the solution. Complexity O(n*m)
  */
-public class ScoreSolver implements IPetproblemSolver {
+public class GugtenReitsmaSolver implements IPetproblemSolver {
 
 	@Override
 	public int[] solve(int n, int m, int[][] compatibility) {
