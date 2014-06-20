@@ -138,7 +138,7 @@ So the score is determined by the previous row without considering the jth eleme
 After the score matrix is filled the pets are assigned by choosing the highest scores first, taking into account the pets that already have been chosen.
 If there are two or more same scores then the chosen pet is determined by the value that is lost when choosing that pet.
 The one with the lowest loss value is chosen.
-All these loss values are determined by the remaining scores in that row, for example, the loss value of element (3,3) is: score(3,3) + score(2,3) + score(1,3) + score(0,3).
+All these loss values are determined by the remaining scores in that row, for example, the loss value of element (3,3) is: score(3,3) + score(4,3) + score(5,3) + .. + score(n-1,3).
 All these values are stored in a matrix for quick access.
 
 \subsection{Example}
@@ -189,7 +189,7 @@ Processing this will result in the following assignment:
 Note that there are still two choices for the first assignment $(0,0)$, even when taking the loss value into account.
 However, it does not matter which one is chosen first, both assignments will give an optimal result.
 
-$(1,3)$ is assigned because they both have the highest score, but the value of $(1,2)$ is $9$ and $(1,3)$ is $8$, the lowest is chosen which is $(1,3)$. 
+$(1,3)$ is assigned over $(1,3)$, they both have the highest score but the value of $(1,2)$ is $9$ and $(1,3)$ is $8$, the lowest is chosen which is $(1,3)$. 
 
 
 \subsection{Complexity}
